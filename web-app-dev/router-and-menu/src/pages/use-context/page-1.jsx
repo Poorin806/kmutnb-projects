@@ -3,7 +3,7 @@ import ThemeContext from "../../contexts/theme-context";
 
 export default function UseContextPage1() {
   const { theme, toggleTheme } = useContext(ThemeContext);
-  const buttonClass = `rounded-md w-34 h-8 ${theme != "light" ? "bg-black text-white" : "bg-white text-black"}`;
+  const buttonClass = `rounded-md w-34 h-8 ${theme == "light" ? "bg-black text-white" : "bg-white text-black"}`;
   return (
     <div
       className={`context ${theme} flex min-h-[500px] flex-col items-center gap-2 p-4`}

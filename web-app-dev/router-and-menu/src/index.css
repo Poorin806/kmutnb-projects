@@ -16,9 +16,9 @@
 }
 
 .context.dark {
-  @apply bg-white text-black;
+  @apply bg-black text-white;
 }
 
 .context.light {
-  @apply bg-black text-white;
+  @apply bg-white text-black;
 }

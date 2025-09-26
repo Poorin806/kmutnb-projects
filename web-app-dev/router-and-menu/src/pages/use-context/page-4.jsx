@@ -7,7 +7,7 @@ export default function UseContextPage2() {
 
   const { theme } = useContext(ThemeContext);
 
-  const buttonClass = `rounded-md w-24 h-8 ${theme != "light" ? "bg-black text-white" : "bg-white text-black"}`;
+  const buttonClass = `rounded-md w-34 h-8 ${theme == "light" ? "bg-black text-white" : "bg-white text-black"}`;
 
   return (
     <div
