@@ -8,6 +8,8 @@ const ComingSoonPage = lazy(() => import("../pages/coming-soon"));
 const UseContextLayout = lazy(() => import("../pages/use-context/use-context"));
 const UseContextSubPage1 = lazy(() => import("../pages/use-context/page-1"));
 const UseContextSubPage2 = lazy(() => import("../pages/use-context/page-2"));
+const UseContextSubPage3 = lazy(() => import("../pages/use-context/page-3"));
+const UseContextSubPage4 = lazy(() => import("../pages/use-context/page-4"));
 
 export const hookRoutes = [
   <Route key="usestate" path="/usestate" element={<UseStatePage />} />,
@@ -20,5 +22,7 @@ export const hookRoutes = [
     <Route index element={<ComingSoonPage name="useContext" />} />
     <Route path="page-1" element={<UseContextSubPage1 />} />
     <Route path="page-2" element={<UseContextSubPage2 />} />
+    <Route path="page-3" element={<UseContextSubPage3 />} />
+    <Route path="page-4" element={<UseContextSubPage4 />} />
   </Route>,
 ];

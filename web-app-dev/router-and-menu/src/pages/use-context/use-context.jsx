@@ -12,7 +12,7 @@ export default function UseContextLayout() {
   return (
     <ThemeContext.Provider value={{ theme, toggleTheme }}>
       <nav className="mb-4 flex items-center justify-center gap-4 border-b border-[#fff] px-3 py-2">
-        {["page-1", "page-2"].map((hook) => (
+        {["page-1", "page-2", "page-3", "page-4"].map((hook) => (
           <NavLink
             key={hook}
             to={`/usecontext/${hook}`}
