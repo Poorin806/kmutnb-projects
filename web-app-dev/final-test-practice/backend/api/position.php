@@ -11,9 +11,9 @@ $requestMethod = $_SERVER["REQUEST_METHOD"];
 
 switch ($requestMethod) {
   case 'GET':
-    $stmt = $pdo->query("SELECT * FROM employees");
-    $employees = $stmt->fetchAll(PDO::FETCH_ASSOC);
-    echo json_encode($employees);
+    $stmt = $pdo->query("SELECT * FROM positions");
+    $positions = $stmt->fetchAll(PDO::FETCH_ASSOC);
+    echo json_encode($positions);
     break;
   default:
     http_response_code(405);

@@ -11,14 +11,16 @@ function App() {
     <main>
       <BrowserRouter>
         <HomePage />
-        <Routes>
-          <Route path="/" element={<></>} />
-          <Route path="/department" element={<DepartmentPage />} />
-          <Route path="/position" element={<PositionPage />} />
-          <Route path="/employee" element={<EmployeePage />} />
-          <Route path="/salary" element={<h2>Comming soon...</h2>} />
-          <Route path="*" element={<h1>404 - Page not found.</h1>} />
-        </Routes>
+        <div className="container">
+          <Routes>
+            <Route path="/" element={<></>} />
+            <Route path="/department" element={<DepartmentPage />} />
+            <Route path="/position" element={<PositionPage />} />
+            <Route path="/employee" element={<EmployeePage />} />
+            <Route path="/salary" element={<h2>Comming soon...</h2>} />
+            <Route path="*" element={<h1>404 - Page not found.</h1>} />
+          </Routes>
+        </div>
       </BrowserRouter>
     </main>
   );

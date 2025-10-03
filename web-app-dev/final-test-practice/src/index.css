@@ -31,6 +31,33 @@ main {
   /* justify-content: center; */
 }
 
+.container {
+  max-width: 80%;
+  width: 100%;
+  /* background-color: green; */
+}
+
+.debug-container {
+  width: 100%;
+  max-width: 80%;
+  margin: 1.5rem;
+}
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 1rem;
+  border: 1px solid #444;
+}
+
+table > thead,
+tr > th,
+table > tbody > tr > td {
+  border: 1px solid #444;
+  padding: 0.5rem;
+  text-align: left;
+}
+
 .menu {
   display: flex;
   gap: 1rem;
@@ -61,7 +88,7 @@ button:focus-visible {
 @media (prefers-color-scheme: light) {
   :root {
     color: #213547;
-    background-color: #ffffff;
+    background-color: rgba(255, 255, 255, 0.87);
   }
   a:hover {
     color: #747bff;
