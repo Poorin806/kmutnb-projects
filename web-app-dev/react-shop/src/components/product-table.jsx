@@ -4,20 +4,37 @@ import { API_URI } from '../utils/config'
 
 export default function ProductTable() {
   const [productList, setProductList] = useState([])
+  const [loading, setLoading] = useState(true)
+  const [error, setError] = useState(null)
 
   const fetchData = async () => {
     try {
       const productRes = await axios.get(`${API_URI}/product.php`)
-
       setProductList(productRes.data)
+      setLoading(false)
     } catch (err) {
-      console.error('Error: '.err)
+      console.error('Error: ', err)
+      setError(err)
+      setLoading(false)
     }
   }
 
   useEffect(() => {
     fetchData()
   }, [])
+
+  if (loading) {
+    return <div className="p-4 text-center">Loading...</div>
+  }
+
+  if (error) {
+    return (
+      <div className="rounded border border-red-600 p-4 text-red-600">
+        <h3 className="font-bold">Error loading product data:</h3>
+        <p>{error.message}</p>
+      </div>
+    )
+  }
 
   return (
     <div>

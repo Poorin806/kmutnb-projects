@@ -7,6 +7,9 @@ export default function ReportTable() {
   const [categoryList, setCategoryList] = useState([])
   const [stockList, setStockList] = useState([])
 
+  const [loading, setLoading] = useState(true)
+  const [error, setError] = useState(null)
+
   const fetchData = async () => {
     try {
       const productRes = await axios.get(`${API_URI}/product.php`)
@@ -17,11 +20,10 @@ export default function ReportTable() {
       setCategoryList(categoryRes.data)
       setStockList(stockRes.data)
 
-      // console.log(productRes.data)
-      // console.log(categoryRes.data)
-      console.log(stockRes.data)
+      setLoading(false)
     } catch (err) {
       console.error('Error: '.err)
+      setError(err)
     }
   }
 
@@ -29,9 +31,12 @@ export default function ReportTable() {
     fetchData()
   }, [])
 
+  if (error) return `Error: ${error}`
+  if (loading) return 'Loading...'
+
   return (
     <div>
-      <h2 className="my-2 text-lg font-bold">Report Data</h2>
+      <h2 className="my-2 text-lg font-bold">Dashboard</h2>
       <table className="w-full">
         <thead>
           <tr>
