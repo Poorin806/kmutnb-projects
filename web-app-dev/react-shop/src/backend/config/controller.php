@@ -1,7 +1,7 @@
 <?php
 header("Content-Type: application/json; charset=UTF-8");
 
-require_once "./database.php";
+require_once "database.php";
 
 class Controller {
     private $conn;
