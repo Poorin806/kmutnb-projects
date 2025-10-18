@@ -1,30 +1,33 @@
 <?php
-class Database {
+class Database
+{
     private $host = "localhost";
-    private $db_name = "shop_db";
+    // private $db_name = "shop_db";
+    private $db_name = "kmutnb_weblab_shop_db";
     private $username = "root";
     private $password = "";
     public $conn;
 
-    public function __construct(){
+    public function __construct()
+    {
         $this->conn = null;
         try {
             $this->conn = new PDO(
-              "mysql:host=" . $this->host . 
-              ";dbname=" . $this->db_name,
-              $this->username,
-              $this->password
+                "mysql:host=" . $this->host .
+                    ";dbname=" . $this->db_name,
+                $this->username,
+                $this->password
             );
             $this->conn->exec("set names utf8");
-        } catch(PDOException $exception){
-            echo "Connection error: " 
-            . $exception->getMessage();
+        } catch (PDOException $exception) {
+            echo "Connection error: "
+                . $exception->getMessage();
             exit;
         }
     }
 
-    public function getConnection(){
+    public function getConnection()
+    {
         return $this->conn;
     }
 }
-?>
