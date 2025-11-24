@@ -1,11 +1,14 @@
-import React, { useEffect, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 
 import axios from "axios";
 import UserDetailModal from "../components/user-detail-modal";
+import { ThemeContext } from "../components/theme-context";
 
 const USER_URI = "https://jsonplaceholder.typicode.com/users";
 
 export default function UserPage() {
+  const { theme } = useContext(ThemeContext);
+
   // State: Array object
   const [userList, setUserList] = useState([]);
 
@@ -56,7 +59,7 @@ export default function UserPage() {
 
   return (
     <div className="container">
-      <h1>Users</h1>
+      <h1>Users - {theme}</h1>
 
       <table>
         <thead>
@@ -91,7 +94,12 @@ export default function UserPage() {
         </tbody>
       </table>
 
-      <UserDetailModal open={open} onClose={closeModal} user={userDetail} />
+      <UserDetailModal
+        open={open}
+        onClose={closeModal}
+        user={userDetail}
+        number={123}
+      />
     </div>
   );
 }

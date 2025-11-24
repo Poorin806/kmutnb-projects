@@ -1,7 +1,8 @@
 import React from "react";
 import Modal from "react-modal";
+import PropTypes from "prop-types";
 
-export default function UserDetailModal({ open, onClose, user }) {
+export default function UserDetailModal({ open, onClose, user, number }) {
   const customStyles = {
     content: {
       top: "50%",
@@ -25,7 +26,7 @@ export default function UserDetailModal({ open, onClose, user }) {
       style={customStyles}
     >
       <div>
-        <h2>User detail Mother Father</h2>
+        <h2>User detail Mother Father #{number}</h2>
 
         {/* If: there is no data */}
         {!user && <p>Invalid data type... or data is null</p>}
@@ -43,3 +44,11 @@ export default function UserDetailModal({ open, onClose, user }) {
     </Modal>
   );
 }
+
+UserDetailModal.propTypes = {
+  open: PropTypes.bool.isRequired,
+  onClose: PropTypes.func.isRequired,
+  user: PropTypes.object,
+
+  number: PropTypes.number.isRequired,
+};
