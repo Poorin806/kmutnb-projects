@@ -1,0 +1,35 @@
+# dataset root dir
+path: dataset
+
+# train images (relative to 'path')
+train: train
+
+# val images (relative to 'path')
+val: train
+
+names:
+  0: CAT
+  1: DOG
+  2: PERSON
+
+# Hyperparameters
+freeze: (0, ..., 20) # freeze layers 0-20
+
+lr0: 0.01 # initial learning rate
+lrf: 0.01 # final learning rate (lr0 * lrf)
+momentum: 0.937 # SGD momentum
+
+degree: 0.5
+translate: 0.1
+scale: 0.2
+perspective: 0.1
+
+flipup: 0.7
+fliplr: 0.5
+mosaic: 0.2
+
+hsv_h: 0.005 # image HSV-Hue augmentation (fraction)
+hsv_s: 0.7 # image HSV-Saturation augmentation (fraction)
+hsv_v: 0.4 # image HSV-Value augmentation (fraction)
+
+mixup: 0.1
