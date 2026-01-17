@@ -1,0 +1,10 @@
+[
+  {
+    "id": "poll_id",
+    "title": "title",
+    "description": "desc",
+    "author": "Poorin",
+    "createdAt": "yyyy-mm-dd",
+    "updatedAt": "yyyy-mm-dd"
+  }
+]
