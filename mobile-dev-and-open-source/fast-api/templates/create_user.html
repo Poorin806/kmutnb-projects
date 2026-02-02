@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Users - Creating</title>
+
+  <link rel="stylesheet" href="{{ url_for('static', path='css/style.css') }}">
+</head>
+
+<body>
+
+  <main>
+
+    <h1>Create User</h1>
+    <form onsubmit="createUser(event)">
+
+      <table>
+        <tr>
+          <th><label for="name">Name:</label></th>
+          <td>
+            <input type="text" id="name" name="name" required>
+          </td>
+        </tr>
+        <tr>
+          <th><label for="email">Email:</label></th>
+          <td>
+            <input type="email" id="email" name="email" required>
+          </td>
+        </tr>
+        <tr>
+          <td colspan="3">
+            <div style="display: flex; align-items: center; justify-content: center; gap: 0.25rem;">
+              <button type="submit" class="button button-primary">Create</button>
+              <button type="button" class="button button-secondary"
+                onclick="window.location.href='/users'">Cancel</button>
+            </div>
+          </td>
+        </tr>
+      </table>
+
+    </form>
+
+  </main>
+
+  <script>
+
+    async function createUser(e) {
+      e.preventDefault();
+
+      const form = e.target;
+      const formData = new FormData(form);
+      const data = Object.fromEntries(formData.entries());
+
+      // Alternative solution
+      // const data = {
+      //   name: document.getElementById('name').value,
+      //   email: document.getElementById('email').value,
+      // }
+
+      const response = await fetch('/api/users/', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(data),
+      });
+
+      if (response.ok) {
+        alert('User created successfully');
+        window.location.href = '/users';
+      } else {
+        alert('Failed to create user');
+      }
+    }
+
+  </script>
+
+</body>
+
+</html>

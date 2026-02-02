@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Users - Updating</title>
+
+  <link rel="stylesheet" href="{{ url_for('static', path='css/style.css') }}">
+</head>
+
+<body>
+  <main>
+
+    <h1>Update User</h1>
+    <form onsubmit="updateUser(event)">
+
+      <table>
+        <tr>
+          <th><label for="id">ID:</label></th>
+          <td>
+            <input type="text" id="id" name="id" value="{{ user.id }}" required readonly>
+          </td>
+        </tr>
+        <tr>
+          <th><label for="name">Name:</label></th>
+          <td>
+            <input type="text" id="name" name="name" value="{{ user.name }}" required>
+          </td>
+        </tr>
+        <tr>
+          <th><label for="email">Email:</label></th>
+          <td>
+            <input type="email" id="email" name="email" value="{{ user.email }}" required>
+          </td>
+        </tr>
+        <tr>
+          <td colspan="4">
+            <div style="display: flex; align-items: center; justify-self: center; gap: 0.25rem;">
+              <button type="submit" class="button button-primary">Update</button>
+              <button type="button" class="button button-secondary"
+                onclick="window.location.href='/users'">Cancel</button>
+            </div>
+          </td>
+        </tr>
+      </table>
+
+    </form>
+
+  </main>
+
+  <script>
+
+    const userId = `{{ user.id }}`;
+
+    async function updateUser(e) {
+      e.preventDefault();
+
+      const form = e.target;
+      const formData = new FormData(form);
+      const data = Object.fromEntries(formData.entries());
+
+      const response = await fetch(`/api/users/${userId}`, {
+        method: 'PUT',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(data),
+      });
+
+      if (response.ok) {
+        alert('User updated successfully!');
+        window.location.href = '/users';
+      } else {
+        alert('Failed to update user.');
+      }
+    }
+
+  </script>
+</body>
+
+</html>

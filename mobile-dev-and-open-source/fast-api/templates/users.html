@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Users</title>
+
+  <link rel="stylesheet" href="{{ url_for('static', path='css/style.css') }}">
+</head>
+
+<body>
+  <h1>Users</h1>
+
+  <main>
+
+    <div>
+      <button class="button button-primary" type="button" onclick="window.location.href='/users/create'">Create
+        User</button>
+    </div>
+
+    <table>
+      <thead>
+        <tr>
+          <th>ID</th>
+          <th>Name</th>
+          <th>Email</th>
+          <th>Actions</th>
+        </tr>
+      </thead>
+      <tbody>
+        {% for user in users %}
+        <tr>
+          <td>{{user.id}}</td>
+          <td>{{user.name}}</td>
+          <td>{{user.email}}</td>
+          <td>
+            <button type="button" class="button button-secondary"
+              onclick="window.location.href='/users/{{user.id}}/edit'">Edit</button>
+            <button class="button button-danger" onclick="deleteUser('{{user.id}}')">Delete</button>
+          </td>
+        </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+
+  </main>
+
+  <script>
+
+    // Delete users
+    async function deleteUser(userId) {
+
+      const confirmDelete = confirm('Are you sure you want to delete this user?');
+      if (!confirmDelete) {
+        return;
+      }
+
+      const response = await fetch(`/api/users/${userId}`, {
+        method: 'DELETE',
+      });
+
+      const { detail: result } = await response.json();
+
+      if (response.ok) {
+        // Remove the user row from the table
+        alert(result ?? 'User deleted successfully');
+        console.log(result ?? 'User deleted successfully');
+        window.location.reload();
+      } else {
+        alert(result ?? 'Failed to delete user');
+        console.error(result ?? 'Failed to delete user');
+      }
+    }
+
+  </script>
+
+</body>
+
+</html>
