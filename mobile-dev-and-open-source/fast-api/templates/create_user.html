@@ -30,6 +30,12 @@
           </td>
         </tr>
         <tr>
+          <th><label for="tel">Tel:</label></th>
+          <td>
+            <input type="text" id="tel" name="tel" required>
+          </td>
+        </tr>
+        <tr>
           <td colspan="3">
             <div style="display: flex; align-items: center; justify-content: center; gap: 0.25rem;">
               <button type="submit" class="button button-primary">Create</button>
@@ -57,6 +63,7 @@
       // const data = {
       //   name: document.getElementById('name').value,
       //   email: document.getElementById('email').value,
+      //   tel: document.getElementById('tel').value,
       // }
 
       const response = await fetch('/api/users/', {
