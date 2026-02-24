@@ -14,14 +14,29 @@ class _Page2State extends State<Page2> {
     return Scaffold(
       appBar: AppBar(title: const Text("Page 2")),
       body: Center(
-        child: ElevatedButton(
-          onPressed: () {
-            Navigator.push(
-              context,
-              MaterialPageRoute(builder: (context) => const Page3()),
-            );
-          },
-          child: const Text("Go to Page 3"),
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          spacing: 20,
+          children: [
+            // Go to page 3
+            ElevatedButton(
+              onPressed: () {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(builder: (context) => const Page3()),
+                );
+              },
+              child: const Text("Go to Page 3"),
+            ),
+
+            // Back to home page
+            ElevatedButton(
+              onPressed: () {
+                Navigator.pop(context);
+              },
+              child: const Text("Go back"),
+            ),
+          ],
         ),
       ),
     );

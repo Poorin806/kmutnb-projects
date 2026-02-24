@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:lab1/page-2.dart';
+import 'package:lab1/page-3.dart';
 import 'package:lab1/tab-demo.dart';
 
 // Import the shared_preferences package to use it in our app.
@@ -64,6 +66,7 @@ class MyHomePage extends StatefulWidget {
 
 class _MyHomePageState extends State<MyHomePage> {
   int _counter = 0;
+  int _maximumCounter = 50;
 
   @override
   void initState() {
@@ -78,25 +81,40 @@ class _MyHomePageState extends State<MyHomePage> {
     });
   }
 
-  void _incrementCounter() async {
+  void _resetCounter() async {
     final prefs = await SharedPreferences.getInstance();
-    final newValue = (prefs.getInt('counter') ?? 0) + 1;
-
-    await prefs.setInt('counter', newValue);
+    await prefs.setInt('counter', 0);
 
     setState(() {
-      _counter = newValue;
+      _counter = 0;
     });
   }
 
-  void _decrementCounter() async {
+  void _incrementCounter({int value = 1}) async {
     final prefs = await SharedPreferences.getInstance();
-    final newValue = (prefs.getInt('counter') ?? 0) - 1;
+    final newValue = (prefs.getInt('counter') ?? 0) + value;
 
-    await prefs.setInt('counter', newValue);
+    final int finalValue = newValue > _maximumCounter
+        ? _maximumCounter
+        : newValue;
+
+    await prefs.setInt('counter', finalValue);
 
     setState(() {
-      _counter = newValue;
+      _counter = finalValue;
+    });
+  }
+
+  void _decrementCounter({int value = 1}) async {
+    final prefs = await SharedPreferences.getInstance();
+    final newValue = (prefs.getInt('counter') ?? 0) - value;
+
+    final int finalValue = newValue < 0 ? 0 : newValue;
+
+    await prefs.setInt('counter', finalValue);
+
+    setState(() {
+      _counter = finalValue;
     });
   }
 
@@ -148,21 +166,86 @@ class _MyHomePageState extends State<MyHomePage> {
               style: TextStyle(fontSize: 30, color: Colors.red),
             ),
 
-            Row(
-              mainAxisAlignment: MainAxisAlignment.center,
-              spacing: 20,
+            Column(
+              spacing: 10,
               children: [
-                ElevatedButton(
-                  onPressed: () {
-                    _incrementCounter();
-                  },
-                  child: const Text('เพิ่ม'),
+                // Button - Row 1
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  spacing: 20,
+                  children: [
+                    ElevatedButton(
+                      onPressed: () {
+                        _incrementCounter();
+                      },
+                      child: const Text('เพิ่ม 1 ครั้ง'),
+                    ),
+                    ElevatedButton(
+                      onPressed: () {
+                        _decrementCounter();
+                      },
+                      child: const Text('ลด 1 ครั้ง'),
+                    ),
+                  ],
+                ),
+
+                // Button - Row 2
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  spacing: 20,
+                  children: [
+                    ElevatedButton(
+                      onPressed: () {
+                        _incrementCounter(value: 5);
+                      },
+                      child: const Text('เพิ่ม 5 ครั้ง'),
+                    ),
+                    ElevatedButton(
+                      onPressed: () {
+                        _decrementCounter(value: 5);
+                      },
+                      child: const Text('ลด 5 ครั้ง'),
+                    ),
+                  ],
                 ),
                 ElevatedButton(
+                  // Red button
+                  style: ElevatedButton.styleFrom(
+                    backgroundColor: Colors.red,
+                    foregroundColor: Colors.white,
+                  ),
                   onPressed: () {
-                    _decrementCounter();
+                    _resetCounter();
                   },
-                  child: const Text('ลด'),
+                  child: const Text('รีเซ็ต'),
+                ),
+              ],
+            ),
+
+            Row(
+              spacing: 20,
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                // Go to page 2
+                ElevatedButton(
+                  onPressed: () {
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(builder: (context) => const Page2()),
+                    );
+                  },
+                  child: const Text('ไปหน้าที่ 2'),
+                ),
+
+                // Go to page 3
+                ElevatedButton(
+                  onPressed: () {
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(builder: (context) => const Page3()),
+                    );
+                  },
+                  child: const Text('ไปหน้าที่ 3'),
                 ),
               ],
             ),
