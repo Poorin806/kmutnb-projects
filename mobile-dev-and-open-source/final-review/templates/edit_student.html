@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+
+      max-width: 70svw;
+      margin-left: auto;
+      margin-right: auto;
+
+      font-family: Arial, Helvetica, sans-serif;
+    }
+
+    body {
+      padding: 1rem 0;
+    }
+
+    main {
+      display: flex;
+      flex-direction: column;
+      gap: 1rem;
+    }
+
+    table {
+      width: 100%;
+      border: 1px solid black;
+      border-collapse: collapse;
+    }
+
+    td,
+    th {
+      border: 1px solid black;
+      padding: 0.2rem 0.4rem;
+    }
+
+    .button {
+      padding: 0.5rem 1rem;
+      border: none;
+      border-radius: 4px;
+      cursor: pointer;
+    }
+
+    .button-primary {
+      background-color: #4caf50;
+      color: white;
+    }
+
+    .button-primary:hover {
+      background-color: #45a049;
+    }
+
+    .button-danger {
+      background-color: #f44336;
+      color: white;
+    }
+
+    .button-danger:hover {
+      background-color: #da190b;
+    }
+
+    .button-secondary {
+      background-color: #008cba;
+      color: white;
+    }
+
+    .button-secondary:hover {
+      background-color: #007bb5;
+    }
+
+    form {
+      display: flex;
+      flex-direction: column;
+      gap: 0.5rem;
+    }
+  </style>
+
+</head>
+
+<body>
+
+  <main>
+
+    <form onsubmit="editStudent(event)">
+      <label for="student_id">Student ID:</label>
+      <input type="text" id="student_id" name="student_id" value="{{ student.student_id }}" required>
+
+      <label for="name">Name:</label>
+      <input type="text" id="name" name="name" value="{{ student.name }}" required>
+
+      <label for="division">Division:</label>
+      <input type="text" id="division" name="division" value="{{ student.division }}" required>
+
+      <button type="submit" class="button button-primary">Edit Student</button>
+    </form>
+
+  </main>
+
+  <script>
+
+    async function editStudent(event) {
+
+      event.preventDefault();
+
+      const studentId = document.getElementById('student_id').value;
+      const name = document.getElementById('name').value;
+      const division = document.getElementById('division').value;
+
+      const response = await fetch(`/api/students`, {
+        method: 'PUT',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          student_id: studentId,
+          name: name,
+          division: division
+        }),
+      });
+
+      if (response.ok) {
+        alert('User updated successfully');
+        window.location.href = '/students';
+      } else {
+        alert('Failed to update user');
+      }
+
+    }
+
+  </script>
+
+</body>
+
+</html>
